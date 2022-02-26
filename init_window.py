@@ -2,11 +2,19 @@ import tkinter as tk
 from tkinter.font import Font
 import os
 import pyodbc
+import User
+import Conn
 
 
 class initwin():
 
-    def __init__(self, root):
+    def __init__(self, root, user, conn):
+        if(user == None):
+            self.user = User.user(None, None, None, None, None, None, 0, None)
+            self.conn = Conn.conn()
+        else:
+            self.user = user
+            self.conn = conn
         self.win = root
         self.setup()
         self.buttonOptions()
