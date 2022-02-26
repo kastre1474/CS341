@@ -8,9 +8,9 @@ import Conn
 
 class initwin():
 
-    def __init__(self, root, user, conn):
+    def __init__(self, root, user = None, conn = None):
         if(user == None):
-            self.user = User.user(None, None, None, None, None, None, 0, None)
+            self.user = User.user(None, None, None, None, None, 0, None)
             self.conn = Conn.conn()
         else:
             self.user = user
