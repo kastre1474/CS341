@@ -1,10 +1,10 @@
 
 import os
-import Window
+import init_window
 
 def main():
 
-    Window.createPage()
+    init_window.createPage()
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(__file__))
