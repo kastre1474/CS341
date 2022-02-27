@@ -1,10 +1,10 @@
 import tkinter as tk
 import os
-import init_window
+import Home
 
 def main():
     master = tk.Tk()
-    init_window.initwin(master)
+    Home.init(master)
     master.mainloop()
 
 if __name__ == "__main__":
