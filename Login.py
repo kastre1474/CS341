@@ -6,6 +6,7 @@ import User
 import Conn
 import Home
 import Programs
+import CreateProgram
 
 def init(root, user, conn):
     clearWin(root)
@@ -44,6 +45,9 @@ def setuplogin(root, user, conn):
     te2.grid(row = 2, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
     b4.grid(row = 3, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
     inclabel.grid(row = 3, column = 3, columnspan = 1, sticky = tk.E, pady = 10)
+    if(user.type == 'S'):
+        b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
+        b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
 
 def setuplogout(root, user, conn):
     root.configure(background = 'white')
@@ -89,6 +93,9 @@ def home(root, user, conn):
 
 def programs(root, user, conn):
     Programs.init(root, user, conn)
+
+def createProgram(root, user, conn):
+    CreateProgram.init(root, user, conn)
 
 def exitFullScreen(e, root):
     root.attributes("-fullscreen", False)
