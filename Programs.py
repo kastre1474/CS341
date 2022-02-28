@@ -9,8 +9,7 @@ import Conn
 import Home
 import Login
 import Conn
-
-
+import CreateProgram
 
 def init(root, user, conn):
     clearWin(root)
@@ -36,19 +35,30 @@ def setupprog(root, user, conn):
     b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
     b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
     b4.grid(row = 4, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    wrapper1 = LabelFrame(root)
-    my_canvas = Canvas(wrapper1)
-    my_canvas.pack(side=LEFT, fill = "both", expand="yes")
-    yscrollbar = ttk.Scrollbar(wrapper1, orient="vertical", command=my_canvas.yview)
-    yscrollbar.pack(side=RIGHT, fill="y")
-    my_canvas.configure(yscrollcommand=yscrollbar.set)
-    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
-    myframe = Frame(my_canvas)
-    my_canvas.create_window((0,0), window=myframe, anchor="nw")
-    wrapper1.grid(row = 1, column = 1, rowspan = 4, columnspan = 4, padx=10, pady= 10)
+    if(user.type == 'S'):
+        b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
+        b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+    setUpTree(root, conn)
+    
+def setUpTree(root, conn):
+    columns = ('Course Name', 'Course Description', 'Day', 'Time', 'Length','Location')
+    tree = ttk.Treeview(root, columns=columns, show='headings')
+    tree.heading('Course Name', text='Course Name')
+    tree.heading('Course Description', text='Course Description')
+    tree.heading('Day', text='Day')
+    tree.heading('Time', text='Time')
+    tree.heading('Length', text='Length')
+    tree.heading('Location', text='Location')
+    contacts = []
     for prog in getprogs(conn):
-        tk.Label(myframe, text = prog[2] + '-' + prog[1]).pack(anchor="w")
-
+        contacts.append((prog[2], prog[1], prog[9], prog[5], prog[8], prog[3]))
+    for contact in contacts:
+        tree.insert('', tk.END, values=contact)
+    tree.grid(rowspan = 4,row = 1, column = 1, padx = 10, pady = 10, sticky='nsew')
+    scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=tree.yview)
+    tree.configure(yscroll=scrollbar.set)
+    scrollbar.grid(rowspan = 4, row = 1, column = 2, sticky='ns')
+   
 def getprogs(conn):
     conn.cursor.execute("SELECT * FROM dbo.[Program]")
     rows = conn.cursor.fetchall()
@@ -59,6 +69,9 @@ def login(root, user, conn):
 
 def home(root, user, conn):
     Home.init(root, user, conn)
+
+def createProgram(root, user, conn):
+    CreateProgram.init(root, user, conn)
 
 def exitFullScreen(e, root):
     root.attributes("-fullscreen", False)

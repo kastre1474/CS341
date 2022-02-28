@@ -5,6 +5,7 @@ import pyodbc
 import User
 import Conn
 import Home
+import Programs
 
 def init(root, user, conn):
     clearWin(root)
@@ -26,7 +27,7 @@ def setuplogin(root, user, conn):
         canvas.create_text(80, 10, text="Signed in as: {}".format(user.fname), font=Font(family = "Helvetica", size = 10, weight = "bold"))
     canvas.grid(row = 0, column = 0, columnspan = 11)
     b1 = tk.Button(root, text = 'Home', command = lambda: home(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b2 = tk.Button(root, text = 'Programs', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
+    b2 = tk.Button(root, text = 'Programs', command = lambda: programs(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b3 = tk.Button(root, text = 'About', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     l1 = tk.Label(root, text = "Email Address:", bg = "White", font = Font(family = "Helvetica", size = 20, weight = "bold"))
     l2 = tk.Label(root, text = "Password:", bg = "White", font = Font(family = "Helvetica", size = 20, weight = "bold"))
@@ -57,7 +58,7 @@ def setuplogout(root, user, conn):
         canvas.create_text(80, 10, text="Signed in as: {}".format(user.fname), font=Font(family = "Helvetica", size = 10, weight = "bold"))
     canvas.grid(row = 0, column = 0, columnspan = 11)
     b1 = tk.Button(root, text = 'Home', command = lambda: home(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b2 = tk.Button(root, text = 'Programs', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
+    b2 = tk.Button(root, text = 'Programs', command = lambda: programs(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b3 = tk.Button(root, text = 'About', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b4 = tk.Button(root, text = 'Log Out', command = lambda: logout(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
@@ -85,6 +86,9 @@ def logout(root, user, conn):
     
 def home(root, user, conn):
     Home.init(root, user, conn)
+
+def programs(root, user, conn):
+    Programs.init(root, user, conn)
 
 def exitFullScreen(e, root):
     root.attributes("-fullscreen", False)

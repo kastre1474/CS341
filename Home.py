@@ -5,6 +5,7 @@ import pyodbc
 import User
 import Conn
 import Login
+import Programs
 
 def init(root, user, conn):
     clearWin(root)
@@ -27,7 +28,7 @@ def setup(root, user):
         
 def buttonOptions(root, user, conn):
     b1 = tk.Button(root, text = 'Home', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b2 = tk.Button(root, text = 'Programs', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
+    b2 = tk.Button(root, text = 'Programs', command = lambda: programs(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b3 = tk.Button(root, text = 'About', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     logintext = 'Login/SignUp' if user.userid == None else 'Sign Out'
     b4 = tk.Button(root, text = logintext, command = lambda:login(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
@@ -38,6 +39,9 @@ def buttonOptions(root, user, conn):
         
 def login(root, user, conn):
     Login.init(root, user, conn)
+
+def programs(root, user, conn):
+    Programs.init(root, user, conn)
     
 def exitFullScreen(e, root):
     root.attributes("-fullscreen", False)
