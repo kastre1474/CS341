@@ -69,7 +69,10 @@ def setuplogout(root, user, conn):
     b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
     b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
     b4.grid(row = 2, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
- 
+    if(user.type == 'S'):
+        b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
+        b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+        
 def login(root, user, conn, email, pword, inclabel):
     conn.cursor.execute("SELECT * FROM dbo.[User] WHERE EMAIL='{}' AND PASSWORD='{}'".format(email.get(), pword.get()))
     if(conn.cursor.rowcount == 0):

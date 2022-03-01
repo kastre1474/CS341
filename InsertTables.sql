@@ -40,7 +40,10 @@ CREATE TABLE History(
 );
 
 INSERT INTO dbo.[User] (FNAME, LNAME, DOB, EMAIL, [PASSWORD], [type])
-VALUES ('admin', 'admin', '1/1/1900', 'admin', 'admin', 'S')
+VALUES ('admin', 'admin', '1/1/1900', 'admin', 'admin', 'S'),
+VALUES ('Jane', 'Doe', '1/1/1967', 'jdoe@gmail.com', 'jdoe', 'M'),
+VALUES ('Luke', 'Anderson', '10/15/1975', 'landerson@gmail.com', 'landerson', 'N')
+
 
 INSERT INTO dbo.Program ([DESCRIPTION], [NAME], LOCATION, FEE, [TIME], STARTDATE, ENDDATE, [LENGTH], [DAY], SIZE, USERID)
 VALUES ('introduction to rock climbing', 'Rockclimbing 1', 'Onalaska', 100, '4:00', '3/22/22', '4/22/22', 90, 2, 30, 1),

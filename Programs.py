@@ -41,7 +41,7 @@ def setupprog(root, user, conn):
     setUpTree(root, conn)
     
 def setUpTree(root, conn):
-    columns = ('Course Name', 'Course Description', 'Day', 'Time', 'Length','Location')
+    columns = ('Course Name', 'Course Description', 'Day', 'Time', 'Length','Location', 'Member Fee', 'Non Member Fee')
     tree = ttk.Treeview(root, columns=columns, show='headings')
     tree.heading('Course Name', text='Course Name')
     tree.heading('Course Description', text='Course Description')
@@ -49,9 +49,11 @@ def setUpTree(root, conn):
     tree.heading('Time', text='Time')
     tree.heading('Length', text='Length')
     tree.heading('Location', text='Location')
+    tree.heading('Member Fee', text='Member Fee')
+    tree.heading('Non Member Fee', text='Non Member Fee')
     contacts = []
     for prog in getprogs(conn):
-        contacts.append((prog[2], prog[1], prog[9], prog[5], prog[8], prog[3]))
+        contacts.append((prog[2], prog[1], prog[9], prog[5], prog[8], prog[3], prog[4], prog[4] * 2))
     for contact in contacts:
         tree.insert('', tk.END, values=contact)
     tree.grid(rowspan = 4,row = 1, column = 1, padx = 10, pady = 10, sticky='nsew')
