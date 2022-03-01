@@ -31,10 +31,10 @@ def setup(root, user, conn):
     b3 = tk.Button(root, text = 'About', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     logintext = 'Login/SignUp' if user.userid == None else 'Sign Out'
     b4 = tk.Button(root, text = logintext, command = lambda:login(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b4.grid(row = 4, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b4.grid(row = 4, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
     entryFields = ['Class Name:', 'Class Description:', 'Location:','Member Fee:', 'Time:', 'Start Date:', 'End Date:', 'Day of the Week:', 'Length in Minutes:', 'Number of Spots:']
     bgFrame = tk.Frame(root, width=screenWidth)
     bgFrame.grid(row = 1, column = 3, rowspan = 4, sticky = tk.W)

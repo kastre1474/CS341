@@ -36,18 +36,18 @@ def setuplogin(root, user, conn):
     te2 = tk.Entry(root,  width = 0, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     inclabel = tk.Label(root, text = "", bg = "White", font = Font(family = "Helvetica", size = 20, weight = "bold"))
     b4 = tk.Button(root, text = 'Login', command = lambda: login(root, user, conn, te1, te2, inclabel), font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
     l1.grid(row = 1, column = 3, columnspan = 1, sticky = tk.E, pady = 10)
     l2.grid(row = 2, column = 3, columnspan = 1, sticky = tk.E, pady = 10)
     te1.grid(row = 1, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
     te2.grid(row = 2, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
-    b4.grid(row = 3, column = 4, columnspan = 3, sticky = tk.W+tk.E, pady = 10)
+    b4.grid(row = 3, column = 4, columnspan = 3, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
     inclabel.grid(row = 3, column = 3, columnspan = 1, sticky = tk.E, pady = 10)
     if(user.type == 'S'):
         b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
-        b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+        b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
 
 def setuplogout(root, user, conn):
     root.configure(background = 'white')
@@ -72,7 +72,7 @@ def setuplogout(root, user, conn):
     if(user.type == 'S'):
         b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
         b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-        
+
 def login(root, user, conn, email, pword, inclabel):
     conn.cursor.execute("SELECT * FROM dbo.[User] WHERE EMAIL='{}' AND PASSWORD='{}'".format(email.get(), pword.get()))
     if(conn.cursor.rowcount == 0):
