@@ -31,18 +31,20 @@ def setupprog(root, user, conn):
     b3 = tk.Button(root, text = 'About', command = None, font = Font(family = "Helvetica", size = 20, weight = "bold"))
     logintext = 'Login/SignUp' if user.userid == None else 'Sign Out'
     b4 = tk.Button(root, text = logintext, command = lambda:login(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))
-    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
-    b4.grid(row = 4, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+    b1.grid(row = 1, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b2.grid(row = 2, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b3.grid(row = 3, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    b4.grid(row = 4, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
     if(user.type == 'S'):
         b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
         b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
     setUpTree(root, conn)
     
 def setUpTree(root, conn):
+    tree_frame = tk.Frame(root, width=400, height=200)
+    tree_frame.pack_propagate(0)
     columns = ('Course Name', 'Course Description', 'Day', 'Time', 'Length','Location', 'Member Fee', 'Non Member Fee')
-    tree = ttk.Treeview(root, columns=columns, show='headings')
+    tree = ttk.Treeview(tree_frame, columns=columns, show='headings')
     tree.heading('Course Name', text='Course Name')
     tree.heading('Course Description', text='Course Description')
     tree.heading('Day', text='Day')
@@ -56,10 +58,8 @@ def setUpTree(root, conn):
         contacts.append((prog[2], prog[1], prog[9], prog[5], prog[8], prog[3], prog[4], prog[4] * 2))
     for contact in contacts:
         tree.insert('', tk.END, values=contact)
-    tree.grid(rowspan = 4,row = 1, column = 1, padx = 10, pady = 10, sticky='nsew')
-    scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=tree.yview)
-    tree.configure(yscroll=scrollbar.set)
-    scrollbar.grid(rowspan = 4, row = 1, column = 2, sticky='ns')
+    tree.pack()
+    tree_frame.grid(row = 1, column = 1,columnspan = 10, rowspan = 4, sticky='nsew')
    
 def getprogs(conn):
     conn.cursor.execute("SELECT * FROM dbo.[Program]")
