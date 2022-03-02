@@ -48,6 +48,7 @@ def setuplogin(root, user, conn):
     if(user.type == 'S'):
         b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
         b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E+tk.S+tk.N, pady = 10)
+    root.bind("<Return>", lambda event: login(root, user, conn, te1, te2, inclabel, event))
 
 def setuplogout(root, user, conn):
     root.configure(background = 'white')
@@ -72,8 +73,9 @@ def setuplogout(root, user, conn):
     if(user.type == 'S'):
         b5 = tk.Button(root, text = 'Create Program', command = lambda:createProgram(root, user, conn), font = Font(family = "Helvetica", size = 20, weight = "bold"))  
         b5.grid(row = 5, column = 0, columnspan = 1, sticky = tk.W+tk.E, pady = 10)
+  
 
-def login(root, user, conn, email, pword, inclabel):
+def login(root, user, conn, email, pword, inclabel, e=None):
     conn.cursor.execute("SELECT * FROM dbo.[User] WHERE EMAIL='{}' AND PASSWORD='{}'".format(email.get(), pword.get()))
     if(conn.cursor.rowcount == 0):
         inclabel.config(text="Email or Password Incorrect")
